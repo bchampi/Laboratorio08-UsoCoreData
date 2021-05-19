@@ -9,22 +9,23 @@
 import UIKit
 
 class ViewControllerCrearTarea: UIViewController {
-
+    @IBOutlet weak var txtNameTask: UITextField!
+    @IBOutlet weak var swImportant: UISwitch!
+    
+    var previousVC = ViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnAddTask(_ sender: Any) {
+        let task = Task()
+        task.name = txtNameTask.text!
+        task.important = swImportant.isOn
+        previousVC.tasks.append(task)
+        previousVC.tableView.reloadData()
+        navigationController?.popViewController(animated: true)
     }
-    */
-
+    
 }

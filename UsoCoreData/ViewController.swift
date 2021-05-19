@@ -53,6 +53,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tasks = createTasks()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let afterVC = segue.destination as! ViewControllerCrearTarea
+        afterVC.previousVC = self
+    }
 
 }
 

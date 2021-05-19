@@ -77,6 +77,9 @@
                                 <rect key="frame" x="169" y="378" width="76" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Agregar"/>
+                                <connections>
+                                    <action selector="btnAddTask:" destination="K04-o3-2TU" eventType="touchUpInside" id="YrW-NL-P5O"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -100,6 +103,10 @@
                         <viewLayoutGuide key="safeArea" id="Mke-lp-lDI"/>
                     </view>
                     <navigationItem key="navigationItem" id="ArP-fI-1CL"/>
+                    <connections>
+                        <outlet property="swImportant" destination="7yT-Bq-Jbx" id="B3O-vd-05p"/>
+                        <outlet property="txtNameTask" destination="PVl-tn-1kz" id="E8b-TP-wNJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXH-JA-Lof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
