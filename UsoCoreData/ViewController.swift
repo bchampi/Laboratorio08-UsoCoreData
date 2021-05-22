@@ -12,7 +12,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func addTask(_ sender: Any) {
+        performSegue(withIdentifier: "agregarSegue", sender: nil)
+    }
+    
     var tasks: [Task] = []
+    var indexSelect: Int = 0
     
     func createTasks() -> [Task] {
         let task1 = Task()
@@ -46,6 +51,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexSelect = indexPath.row
+        let task = tasks[indexPath.row]
+        performSegue(withIdentifier: "tareaSeleccionadaSegue", sender: task)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -55,8 +66,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let afterVC = segue.destination as! ViewControllerCrearTarea
-        afterVC.previousVC = self
+        if segue.identifier == "agregarSegue" {
+            let afterVC = segue.destination as! ViewControllerCrearTarea
+            afterVC.previousVC = self
+        } else if (segue.identifier == "tareaSeleccionadaSegue") {
+            let afterVC = segue.destination as! ViewControllerTareaCompletada
+            afterVC.task = sender as! Task
+            afterVC.previousVC = self
+        }
     }
 
 }

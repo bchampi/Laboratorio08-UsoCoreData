@@ -33,19 +33,21 @@
                         <barButtonItem key="backBarButtonItem" title="Volver" id="0jx-kq-S3g"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" style="done" id="HxI-Ye-Go0">
                             <connections>
-                                <segue destination="K04-o3-2TU" kind="show" id="bKc-DX-LW2"/>
+                                <action selector="addTask:" destination="BYZ-38-t0r" id="GC8-Ef-8Lw"/>
+                                <segue destination="K04-o3-2TU" kind="show" identifier="agregarSegue" id="yXH-Ln-6eX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="VL0-Nb-Y3C" id="tIx-tT-j1R"/>
+                        <segue destination="s4q-9Z-ivF" kind="show" identifier="tareaSeleccionadaSegue" id="zhW-WK-Rkh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="855" y="138"/>
         </scene>
-        <!--View Controller Crear Tarea-->
+        <!--Agregar Tarea-->
         <scene sceneID="aWa-T4-qm2">
             <objects>
                 <viewController id="K04-o3-2TU" customClass="ViewControllerCrearTarea" customModule="UsoCoreData" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +104,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mke-lp-lDI"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ArP-fI-1CL"/>
+                    <navigationItem key="navigationItem" title="Agregar Tarea" id="ArP-fI-1CL"/>
                     <connections>
                         <outlet property="swImportant" destination="7yT-Bq-Jbx" id="B3O-vd-05p"/>
                         <outlet property="txtNameTask" destination="PVl-tn-1kz" id="E8b-TP-wNJ"/>
@@ -110,7 +112,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXH-JA-Lof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576.8115942028987" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1599" y="138"/>
+        </scene>
+        <!--Tarea Importante-->
+        <scene sceneID="4NT-Ns-Fmb">
+            <objects>
+                <viewController id="s4q-9Z-ivF" customClass="ViewControllerTareaCompletada" customModule="UsoCoreData" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WfP-D9-4Jq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mc3-84-Qhs">
+                                <rect key="frame" x="177.5" y="160" width="59.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5H-f7-s7b">
+                                <rect key="frame" x="157.5" y="210" width="99" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Completado!"/>
+                                <connections>
+                                    <action selector="completeTask:" destination="s4q-9Z-ivF" eventType="touchUpInside" id="z13-ut-r3K"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="t5H-f7-s7b" firstAttribute="top" secondItem="Mc3-84-Qhs" secondAttribute="bottom" constant="20" id="5p0-xa-eSI"/>
+                            <constraint firstItem="Mc3-84-Qhs" firstAttribute="centerX" secondItem="WfP-D9-4Jq" secondAttribute="centerX" id="S6k-wb-9J8"/>
+                            <constraint firstItem="t5H-f7-s7b" firstAttribute="centerX" secondItem="WfP-D9-4Jq" secondAttribute="centerX" id="g2c-Eo-pKb"/>
+                            <constraint firstItem="Mc3-84-Qhs" firstAttribute="top" secondItem="nam-at-WW2" secondAttribute="top" constant="20" id="sjD-PC-0RJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nam-at-WW2"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tarea Importante" id="u6F-7A-OOJ"/>
+                    <connections>
+                        <outlet property="lblTask" destination="Mc3-84-Qhs" id="5hH-Mz-JuD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Mu-Dp-fA3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2341" y="138"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZQi-1v-oYs">
