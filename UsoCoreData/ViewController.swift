@@ -19,20 +19,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var tasks: [Task] = []
     var indexSelect: Int = 0
     
-    func createTasks() -> [Task] {
-        let task1 = Task()
-        task1.name = "Estudiar para el exámen"
-        task1.important = false
-        
-        let task2 = Task()
-        task2.name = "Hacer los laboratorios"
-        task2.important = true
-        
-        let task3 = Task()
-        task3.name = "Estudiar para subsa"
-        task3.important = false
-        
-        return [task1, task2, task3]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getTask()
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,11 +38,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = UITableViewCell()
         let task = tasks[indexPath.row]
         if task.important {
-            cell.textLabel?.text = "😃\(task.name)"
+            cell.textLabel?.text = "😃\(task.name!)"
         } else {
-            cell.textLabel?.text = "😞\(task.name)"
+            cell.textLabel?.text = "😞\(task.name!)"
         }
-        
         return cell
     }
     
@@ -57,19 +51,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         performSegue(withIdentifier: "tareaSeleccionadaSegue", sender: task)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tasks = createTasks()
+    func getTask() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            tasks = try context.fetch(Task.fetchRequest()) as! [Task]
+        } catch {
+            print("Error al leer la entidad de CoreData")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "agregarSegue" {
-            let afterVC = segue.destination as! ViewControllerCrearTarea
-            afterVC.previousVC = self
-        } else if (segue.identifier == "tareaSeleccionadaSegue") {
+        if (segue.identifier == "tareaSeleccionadaSegue") {
             let afterVC = segue.destination as! ViewControllerTareaCompletada
             afterVC.task = sender as! Task
             afterVC.previousVC = self
