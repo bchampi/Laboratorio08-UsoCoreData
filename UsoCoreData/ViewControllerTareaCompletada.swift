@@ -15,8 +15,9 @@ class ViewControllerTareaCompletada: UIViewController {
     @IBOutlet weak var lblTask: UILabel!
     
     @IBAction func completeTask(_ sender: Any) {
-        previousVC.tasks.remove(at: previousVC.indexSelect)
-        previousVC.tableView.reloadData()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(task)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         navigationController?.popViewController(animated: true)
         
     }
@@ -28,11 +29,11 @@ class ViewControllerTareaCompletada: UIViewController {
         let index: String = String(previousVC.indexSelect + 1)
         if task.important {
             title = "Tarea \(index)"
-            lblTask.text = "😇\(task.name)"
+            lblTask.text = "😇\(task.name!)"
         }
         else {
             title = "Tarea \(index)"
-            lblTask.text = task.name
+            lblTask.text = task.name!
         }
     }
     
